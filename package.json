@@ -1,0 +1,10 @@
+{
+  "name": "youtube_clonecoding",
+  "version": "1.0.0",
+  "description": "Learning Cloning Youtube with VanillaJS and NodeJS",
+  "main": "index.js",
+  "author": "Han Kihoon",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
