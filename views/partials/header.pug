@@ -1,0 +1,14 @@
+header.header
+    .header__column
+        h1.header_w_icon
+            a(href=routes.home)
+                i.fab.fa-youtube KiTube
+    .header__column
+        form(action=routes.search, method="get")
+            input(type="text", placeholder="Search by term ... ", name="term")
+    .header__column
+        ul
+            li
+                a(href=routes.join) Join
+            li
+                a(href=routes.login) Log In
