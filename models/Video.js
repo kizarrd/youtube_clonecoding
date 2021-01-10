@@ -10,14 +10,20 @@ const VideoSchema = new mongoose.Schema({
         required: "Title is required"
     },
     description: String,
-    vies: {
+    views: {
         type: Number,
         default: 0
     },
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 
 const model = mongoose.model("Video", VideoSchema);

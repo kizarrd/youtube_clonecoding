@@ -17,6 +17,7 @@ app.use(function(req, res, next) {
         return next();
         }); // added by jeonhoeun #2.22 comment
 app.set("view engine", "pug");
+app.use("/uploads", express.static("uploads"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
