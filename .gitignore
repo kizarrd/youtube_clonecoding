@@ -119,3 +119,7 @@ dist
 
 package-lock.json
 uploads
+
+.eslintrc.js
+
+static
