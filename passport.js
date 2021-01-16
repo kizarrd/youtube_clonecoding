@@ -18,8 +18,8 @@ passport.use(
 
 passport.serializeUser(function (User, done) {
     done(null, User.id);
-    });
+});
     
-    passport.deserializeUser(function (User, done) {
+passport.deserializeUser(function (User, done) {
     done(null, User);
-    });
+});

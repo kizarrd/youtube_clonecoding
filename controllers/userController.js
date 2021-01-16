@@ -10,7 +10,7 @@ export const postJoin = async (req, res, next) => {
     const {
         body: {name, email, password, password2}
     } = req;
-    console.log(`console logging req.body from postJoin: ${name}`);
+    console.log(`console logging req.body from postJoin: ${JSON.stringify(email)}`);
     if(password !== password2){
         res.status(400);
         res.render("join", { pageTitle: "Join"});
@@ -28,6 +28,11 @@ export const postJoin = async (req, res, next) => {
         }
     }
 };
+
+// export const postJoin = (req, res, next) => {
+//     console.log("console loging from postJoin: ");
+//     console.log(req.body);
+// }
 
 export const getLogin = (req, res) => 
     res.render("login", { pageTitle: "Log In" });
@@ -78,29 +83,47 @@ export const getMe = (req, res) => {
     res.render("userDetail", { pageTitle: "User Detail", user: res.locals.loggedUser});
 };
 
-export const userDetail = (req, res) => {
-    console.log(req.body);
-    res.render("userDetail", { pageTitle: "User Detail" });
-    // const user = req.user;
-    // console.log(user.avatarUrl);
-};
-
-
-// export const userDetail = async (req, res) => {
-//     const {
-//         params: { id },
-//     } = req;
-//     try {
-//         const user = await User.findById(id).populate("videos");
-//         res.render("userDetail", { pageTitle: "User Detail", user });
-//         console.log(`userDetail Console Logging: ${user.name}`);
-//     } catch (error) {
-//         res.redirect(routes.home);
-//     }
+// export const userDetail = (req, res) => {
+//     console.log(req.body);
+//     res.render("userDetail", { pageTitle: "User Detail" });
+//     // const user = req.user;
+//     // console.log(user.avatarUrl);
 // };
 
 
-export const editProfile = (req, res) => 
+export const userDetail = async (req, res) => {
+    const {
+        params: { id },
+    } = req;
+    try {
+        const user = await User.findById(id);
+        res.render("userDetail", { pageTitle: "User Detail", user });
+        console.log(`userDetail Console Logging: ${user.name}`);
+    } catch (error) {
+        res.redirect(routes.home);
+    }
+};
+
+export const postEditProfile = async (req, res) => {
+    const {
+        body: {name, email},
+        file
+    } = req;
+    console.log(req.file);
+    try {
+        await User.findByIdAndUpdate(req.user, {
+            name,
+            email,
+            avatarUrl: file ? file.path : res.loggedUser.avatarUrl
+        });
+        res.redirect(routes.me);
+    } catch(error) {
+        res.render("editProfile", { pageTitle: "Edit Profile" });
+    }
+}
+
+
+export const getEditProfile = (req, res) => 
     res.render("editProfile", { pageTitle: "Edit Profile"});
 export const changePassword = (req, res) => 
     res.render("changePassword", { pageTitle: "Change Password"});
