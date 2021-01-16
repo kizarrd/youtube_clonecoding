@@ -1,7 +1,7 @@
 import express from "express";
-import {changePassword, editProfile, userDetail, users } from "../controllers/userController";
-import { onlyPrivate } from "../middlewares";
 import routes from "../routes";
+import {changePassword, editProfile, userDetail } from "../controllers/userController";
+import { onlyPrivate } from "../middlewares";
 
 const userRouter = express.Router();
 

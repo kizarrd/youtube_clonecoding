@@ -17,7 +17,7 @@ import "./passport";
 
 const app = express();
 
-const CookieStore = MongoStore(session)
+const CookieStore = MongoStore(session);
 
 app.use(helmet());
 app.use(function(req, res, next) {
@@ -29,7 +29,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("static"));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(session({
     secret: process.env.COOKIE_SECRET,
